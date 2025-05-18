@@ -1,19 +1,19 @@
-"use client"
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import RegForm from "@/app/(auth)/_common/RegisterForm";
+import Image from "next/image";
+import LoginForm from "@/app/(auth)/_common/LoginForm";
 import Social from "@/app/(auth)/_common/SocialIconComp";
-import useDarkmode from "@/hooks/useDarkMode";
-import Icons from "@/components/ui/Icon";
-import "../../../assets/scss/app.css"
-import Image from 'next/image';
+import useDarkMode from "@/hooks/useDarkMode";
 
-// image import
 import LogoWhite from "@/assets/images/logo/logo-white.svg";
 import Logo from "@/assets/images/logo/logo.svg";
 import bgImage from "@/assets/images/all-img/login-bg.png";
-const register2 = () => {
-  const [isDark] = useDarkmode();
+
+const Login2 = () => {
+  const [isDark] = useDarkMode();
+
   return (
     <>
       <div className="loginwrapper">
@@ -25,64 +25,73 @@ const register2 = () => {
                   <Link href="/">
                     <Image
                       src={isDark ? LogoWhite : Logo}
-                      alt=""
-                      width={200}
-                      height={120}
+                      alt="Logo"
                       className="mx-auto"
+                      width={120}
+                      height={40}
+                      priority
                     />
                   </Link>
                 </div>
-                <div className="text-center 2xl:mb-10 mb-5">
-                  <h4 className="font-medium">Sign up</h4>
+                <div className="text-center 2xl:mb-10 mb-4">
+                  <h4 className="font-medium">Sign in</h4>
                   <div className="text-slate-500 dark:text-slate-400 text-base">
-                    Create an account to start using Dashcode
+                    Sign in to your account to start using Dashcode
                   </div>
                 </div>
-                <RegForm />
-                <div className=" relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
-                  <div className=" absolute inline-block  bg-white dark:bg-slate-800 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm  text-slate-500  dark:text-slate-400font-normal ">
+
+                <LoginForm />
+
+                <div className="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
+                  <div className="absolute inline-block bg-white dark:bg-slate-800 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-slate-500 dark:text-slate-400 font-normal">
                     Or continue with
                   </div>
                 </div>
+
                 <div className="max-w-[242px] mx-auto mt-8 w-full">
                   <Social />
                 </div>
-                <div className="max-w-[215px] mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm">
-                  Already registered?
+
+                <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-slate-500 dark:text-slate-400 uppercase text-sm">
+                  Don’t have an account?{" "}
                   <Link
-                    href="/login"
+                    href="/register"
                     className="text-slate-900 dark:text-white font-medium hover:underline"
                   >
-                    Sign In
+                    Sign up
                   </Link>
                 </div>
               </div>
+
               <div className="auth-footer text-center">
                 Copyright 2021, Dashcode All Rights Reserved.
               </div>
             </div>
           </div>
+
           <div
             className="left-column bg-cover bg-no-repeat bg-center"
             style={{
-                 backgroundImage: `url(${bgImage.src})`
-              }}
+              backgroundImage: `url(${bgImage.src})`, 
+            }}
           >
             <div className="flex flex-col h-full justify-center">
               <div className="flex-1 flex flex-col justify-center items-center">
                 <Link href="/">
-                 <Image
+                   <Image
                       src={isDark ? LogoWhite : Logo}
-                      alt=""
-                      width={200}
-                      height={120}
-                      className="mx-auto w-full h-full"
-                    /> 
+                      alt="Logo"
+                      className="mx-auto"
+                      width={120}
+                      height={40}
+                      priority
+                      style={{ width: '100%', height: 'auto' }}
+                    />
                 </Link>
               </div>
               <div>
                 <div className="black-500-title max-w-[525px] mx-auto pb-20 text-center">
-                  Unlock your Project
+                  Unlock your Project{" "}
                   <span className="text-white font-bold">performance</span>
                 </div>
               </div>
@@ -94,4 +103,4 @@ const register2 = () => {
   );
 };
 
-export default register2;
+export default Login2;

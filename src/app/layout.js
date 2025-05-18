@@ -6,6 +6,8 @@ import "flatpickr/dist/themes/light.css";
 import "react-svg-map/lib/index.css";
 import '@/assets/scss/app.css';
 import "./globals.css";
+import  ToastProvider  from "@/components/toastify/ToastifyClient";
+// import { ToastContainer, toast } from 'react-toastify';
 
 import localFont from 'next/font/local'
 
@@ -23,14 +25,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <body
         className={`${PlusJakartaSans.variable} antialiased`}
       >
+
+      
+
         <StoreProvider>
           {children}
         </StoreProvider>
+         <ToastProvider/> 
+        {/* </ToastProvider > */}
+
       </body>
     </html>
   );

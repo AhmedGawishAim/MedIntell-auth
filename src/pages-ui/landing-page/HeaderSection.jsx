@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/react";
 import Icons from "@/components/ui/Icon";
-
-const NAV_ITEMS = [
+import Link from "next/link";
+const navItems = [
   { name: "Home", href: "#", isActive: true },
   { name: "Doctors", href: "#" },
   { name: "About Us", href: "#" },
@@ -37,7 +37,7 @@ const specialtiesData = [
   },
 ];
 
-const CALLS_TO_ACTION = [
+const callToAction = [
   { name: "Watch demo", href: "#" },
   { name: "Contact sales", href: "#" },
 ];
@@ -119,7 +119,7 @@ export default function Header() {
               </div>
               {/* class to action */}
               <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                {CALLS_TO_ACTION.map((item) => (
+                {callToAction.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
@@ -133,7 +133,7 @@ export default function Header() {
           </Popover>
 
           {/* Other Navigation Items */}
-          {NAV_ITEMS.filter(item => item.name !== "Home").map((item) => (
+          {navItems.filter(item => item.name !== "Home").map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -151,8 +151,8 @@ export default function Header() {
         </PopoverGroup>
           {/* login / register */}
         <div className="hidden lg:flex gap-3 lg:flex-1 lg:justify-end">
-          <a
-            href="#"
+          <Link
+            href="/register"
             className="
               text-[16px] py-2 px-5 rounded-[14px] font-semibold text-white bg-[#0086FF] 
               hover:opacity-80 hover:scale-105 
@@ -160,9 +160,9 @@ export default function Header() {
             "
           >
             Register
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/login"
             className="
               text-[16px] py-2 px-5 rounded-[14px] font-semibold text-white bg-[#0086FF] 
               hover:opacity-80 hover:scale-105 
@@ -170,7 +170,7 @@ export default function Header() {
             "
           >
             Log in
-          </a>
+          </Link>
         </div>
       </nav>
         {/* menu popup for mobile */}
@@ -193,26 +193,25 @@ export default function Header() {
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
               aria-label="Close menu"
             >
-              ✕
+              <Icons icon="mage:multiply" width="24" height="24" />
             </button>
           </div>
 
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <a
-                  href="#"
+                <Link  href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-[#0086FF] hover:bg-gray-50"
                 >
                   Home
-                </a>
+                </Link>
                 
                 <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="flex w-full justify-between rounded-lg py-2 pr-3.5 pl-3 text-base font-semibold text-gray-900 hover:bg-gray-50">
                     Specialties
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
-                    {[...specialtiesData, ...CALLS_TO_ACTION].map((item) => (
+                    {[...specialtiesData, ...callToAction].map((item) => (
                       <DisclosureButton
                         key={item.name}
                         as="a"
@@ -225,7 +224,7 @@ export default function Header() {
                   </DisclosurePanel>
                 </Disclosure>
 
-                {NAV_ITEMS.filter(item => item.name !== "Home").map((item) => (
+                {navItems.filter(item => item.name !== "Home").map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
@@ -236,18 +235,16 @@ export default function Header() {
                 ))}
               </div>
               <div className="py-6 flex flex-col">
-                <a
-                  href="#"
+                <Link  href="/register"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Register
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link  href="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>

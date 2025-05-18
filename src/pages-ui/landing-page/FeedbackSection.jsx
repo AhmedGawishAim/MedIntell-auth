@@ -103,7 +103,7 @@ export default function MedicalCarousel() {
             <SwiperSlide key={idx}>
               <div className="p-6 bg-white rounded-xl shadow-md h-full flex flex-col justify-between">
                 <div className="flex flex-col gap-12 cursor-pointer">
-                  <p className="text-[17px] text-gray-900 font-display text-balance line-clamp-3">
+                  <p className="text-[17px] text-gray-900 font-display text-balance line-clamp-2 md:line-clamp-3">
                     {testimonial.quote}
                   </p>
                   <div className="block flex-shrink-0">

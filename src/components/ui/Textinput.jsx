@@ -27,10 +27,10 @@ const Textinput = ({
   options,
   onFocus,
   defaultValue,
-
   ...rest
 }) => {
-  const [open, setOpen] = useState(false);
+   const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -59,7 +59,7 @@ const Textinput = ({
             {...rest}
             className={`${
               error ? " has-error" : " "
-            } form-control py-2 ${className}  `}
+            } form-control py-2 px-2 ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             defaultValue={defaultValue}
@@ -111,7 +111,7 @@ const Textinput = ({
           />
         )}
         {/* icon */}
-        <div className="flex text-xl absolute ltr:right-[14px] rtl:left-[14px] top-1/2 -translate-y-1/2  space-x-1 rtl:space-x-reverse">
+        <div className="flex text-xl absolute ltr:!right-[14px] rtl:left-[14px] top-1/2 -translate-y-1/2  space-x-1 rtl:space-x-reverse">
           {hasicon && (
             <span
               className="cursor-pointer text-secondary-500"

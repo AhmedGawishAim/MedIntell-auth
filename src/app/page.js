@@ -12,12 +12,12 @@ import FeedbackSection from '@/pages-ui/landing-page/FeedbackSection';
 import FooterSection from '@/pages-ui/landing-page/FooterSection';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -30,12 +30,12 @@ export default function Home() {
       ) : (
         <div className="landing-page fade-in">
           <HeaderSection />
-          <HeroSection />
-          <AboutSection />
+          {/* <HeroSection /> */}
+          {/* <AboutSection />
           <SpecialtiesSection />
           <StellarValuesSection />
           <FeedbackSection />
-          <FooterSection />
+          <FooterSection /> */}
         </div>
       )}
     </div>
