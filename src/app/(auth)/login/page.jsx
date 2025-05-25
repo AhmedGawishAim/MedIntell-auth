@@ -1,11 +1,13 @@
 "use client";
-
+import "@/assets/scss/app.css"
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LoginForm from "@/app/(auth)/_common/LoginForm";
 import Social from "@/app/(auth)/_common/SocialIconComp";
 import useDarkMode from "@/hooks/useDarkMode";
+import Copyright from "@/components/ui/Copyright";
+import { ToastContainer } from "react-toastify";
 
 import LogoWhite from "@/assets/images/logo/logo-white.svg";
 import Logo from "@/assets/images/logo/logo.svg";
@@ -16,6 +18,7 @@ const Login2 = () => {
 
   return (
     <>
+    <ToastContainer />
       <div className="loginwrapper">
         <div className="lg-inner-column">
           <div className="right-column relative">
@@ -36,7 +39,7 @@ const Login2 = () => {
                 <div className="text-center 2xl:mb-10 mb-4">
                   <h4 className="font-medium">Sign in</h4>
                   <div className="text-slate-500 dark:text-slate-400 text-base">
-                    Sign in to your account to start using Dashcode
+                    Sign in to your account to start using MEDintell
                   </div>
                 </div>
 
@@ -62,9 +65,8 @@ const Login2 = () => {
                   </Link>
                 </div>
               </div>
-
-              <div className="auth-footer text-center">
-                Copyright 2021, Dashcode All Rights Reserved.
+              <div id="copyright" className="auth-footer3  py-5 px-5 text-xl w-full">
+                {<Copyright />}
               </div>
             </div>
           </div>
@@ -79,7 +81,7 @@ const Login2 = () => {
               <div className="flex-1 flex flex-col justify-center items-center">
                 <Link href="/">
                    <Image
-                      src={isDark ? LogoWhite : Logo}
+                      src={isDark ? Logo : LogoWhite}
                       alt="Logo"
                       className="mx-auto"
                       width={120}
@@ -91,8 +93,8 @@ const Login2 = () => {
               </div>
               <div>
                 <div className="black-500-title max-w-[525px] mx-auto pb-20 text-center">
-                  Unlock your Project{" "}
-                  <span className="text-white font-bold">performance</span>
+                  Unlock your Healthcare{" "}
+                  <span className="text-white font-bold">Analytics</span>
                 </div>
               </div>
             </div>

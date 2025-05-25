@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "@/components/ui/Icon";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+
 function Button({
   text,
   type = "button",
@@ -143,7 +144,7 @@ function Button({
       )}
       {link && !div && (
         <Link
-          to={link}
+          href={link}
           className={`btn btn inline-flex justify-center   ${
             isLoading ? " pointer-events-none" : ""
           }

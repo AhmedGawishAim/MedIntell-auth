@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from "react";
 export default function useWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(0);
   // breakpoints
   const breakpoints = {
     sm: "640",
@@ -12,13 +12,21 @@ export default function useWidth() {
 
   // resize widnow size and set width by useMemo
   useMemo(() => {
-    const handleResize = () => {
+   if (typeof window !== "undefined") {
+      // Set initial width
       setWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      
+      const handleResize = () => {
+        setWidth(window.innerWidth);
+      };
+
+      window.addEventListener("resize", handleResize);
+      
+      // Cleanup
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   return { width, breakpoints };

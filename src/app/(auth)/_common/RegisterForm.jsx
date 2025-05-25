@@ -1,34 +1,37 @@
 "use client";
-import React, { useState } from "react";
-import { toast,cssTransition,Bounce } from "react-toastify";
+
+import React, { useEffect, useState } from "react";
 import Textinput from "@/components/ui/Textinput";
+import Button from "@/components/ui/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Checkbox from "@/components/ui/Checkbox";
-import { useDispatch } from "react-redux";
-import { handleRegister } from "@/store/slices/AuthSlice";
-import { useRouter } from "next/navigation"; // ✅ use App Router
+import { useRouter } from "next/navigation";
+import { useSignupMutation } from "@/services/auth";
 
 const schema = yup
   .object({
-    name: yup.string().required("Name is Required"),
+    first_name: yup.string().required("First Name is Required"),
+    last_name: yup.string().required("Last Name is Required"),
+
     email: yup.string().email("Invalid email").required("Email is Required"),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters")
+      .min(6, "Password must be at least 8 characters")
       .max(20, "Password shouldn't be more than 20 characters")
       .required("Please enter password"),
-    confirmpassword: yup
+    re_password: yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match"),
   })
   .required();
 
 const RegForm = () => {
-  const dispatch = useDispatch();
   const router = useRouter(); 
   const [checked, setChecked] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [signup, { data, isSuccess, isLoading }] = useSignupMutation();
 
   const {
     register,
@@ -39,56 +42,83 @@ const RegForm = () => {
     mode: "all",
   });
 
-  // handle register user
-  const onSubmit = async (data) => {
-
-    if (!checked) {
-      toast.error("must agree on terms" ,{ autoClose: 1000, transition: Bounce})
-      return;
-    }
-    const success = await dispatch(handleRegister(data));
-    //  check if already succes in create new user route him to home 
-    if (success) {
+  useEffect(() => {
+    if (!isLoading && isSuccess && data) {
       setTimeout(() => {
-        router.push("/");
-      }, 1200); 
+        router.push('/home');
+      }, 1500);
+    }
+  }, [isSuccess, data]);
+
+
+  const onSubmit = (data) => {
+    if (!checked) {
+      setShowError(true);
+    } else {
+      signup({...data, email: data.email.toLowerCase()})
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 ">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
       <Textinput
-        name="name"
-        label="Name"
+        name="first_name"
+        label="first name"
         type="text"
-        placeholder="Enter your name"
+        placeholder=" Enter your first name"
         register={register}
-        error={errors.name}
+        error={errors.first_name}
+      />
+      <Textinput
+        name="last_name"
+        label="last name"
+        type="text"
+        placeholder=" Enter your last name"
+        register={register}
+        error={errors.last_name}
       />
       <Textinput
         name="email"
-        label="Email"
+        label="email address"
         type="email"
-        placeholder="Enter your email"
+        placeholder=" Enter your email"
         register={register}
         error={errors.email}
       />
       <Textinput
         name="password"
-        label="Password"
+        label="passwrod"
         type="password"
-        placeholder="Enter your password"
+        placeholder=" Enter your password"
         register={register}
         error={errors.password}
       />
+      <Textinput
+        name="re_password"
+        label="confirm passwrod"
+        type="password"
+        placeholder="Confirm your password"
+        register={register}
+        error={errors.re_password}
+      />
       <Checkbox
+        name="checked"
         label="You accept our Terms and Conditions and Privacy Policy"
         value={checked}
-        onChange={() => setChecked(!checked)}
+        onChange={() => (setChecked(!checked), setShowError(false))}
       />
-      <button className="btn btn-dark block w-full text-center">
-        Create an account
-      </button>
+      {showError && (
+        <div className=" mt-2  text-danger-500 block text-sm">
+          Accept Our Terms And Conditions And Privacy Policy
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        text="Create an account"
+        className="btn btn-dark block w-full text-center"
+        isLoading={isLoading} disabled={isLoading}
+      />
     </form>
   );
 };

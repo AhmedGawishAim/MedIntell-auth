@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect } from "react";
 import Textinput from "@/components/ui/Textinput";
+import Button from "@/components/ui/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { handleForgetPassword } from "@/store/slices/AuthSlice"
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useForgotPasswordMutation } from "@/services/auth";
+
 const schema = yup
   .object({
     email: yup.string().email("Invalid email").required("Email is Required"),
   })
   .required();
+
 const ForgotPass = () => {
-  const dispatch = useDispatch();
+  const [ForgotPassword, { isLoading, isSuccess }] = useForgotPasswordMutation();
+  const router = useRouter();
 
   const {
     register,
@@ -23,25 +28,36 @@ const ForgotPass = () => {
   });
 
   const onSubmit = (data) => {
-    dispatch(handleForgetPassword(data));
+    ForgotPassword({
+      email: data.email.toLowerCase(),
+    })
+    reset();
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
-      <Textinput
-        name="email"
-        label="email"
-        type="email"
-        register={register}
-        error={errors.email}
-        placeholder="enter your email"
-      />
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        router.push('/login');
+      }, 1500);
+    }
+}, [isSuccess]);
 
-      <button  type="submit" className="btn btn-dark block w-full text-center">
-        Send recovery email
-      </button>
-    </form>
-  );
+return (
+  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
+      <Textinput
+          name="email"
+          label="email"
+          type="email"
+          register={register}
+          error={errors.email}
+      />
+      <Button type="submit" 
+          className="btn btn-dark block w-full text-center" 
+          text="Send recovery email" 
+          isLoading={isLoading} disabled={isLoading} 
+      />
+  </form>
+);
 };
 
 export default ForgotPass;

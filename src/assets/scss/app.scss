@@ -4,6 +4,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap');
 
+/* Import all component styles here at the root level */
+@import "components/table";
+@import "components/map";
+@import "components/progress";
+@import "components/tippy";
+@import "components/swiper";
+@import "components/alert";
+@import "components/card";
+@import "components/auth";
+@import "components/button";
+@import "components/badge";
+@import "components/typography";
+@import "components/form";
+@import "components/input-group";
+@import "components/react-select";
+@import "components/pagination";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/sidebar";
+@import "layout/settings";
+@import "utility/mix";
+@import "utility/loading";
+@import "utility/css-animation";
+@import "utility/calander";
+@import "utility/full-calender";
+@import "components/print";
+
 @layer base {
   body {
     @apply h-full overflow-x-hidden dark:text-slate-300 text-slate-600 font-normal;
@@ -23,97 +50,13 @@
   body {
     @apply h-full;
   }
-
-  .dashcode-app-wrapper {
-    @apply relative;
-  }
-  .single-sidebar-menu .ReactCollapse--collapse {
-    transition: height 400ms;
-  }
-  .space-xy-5 {
-    > div,
-    > button,
-    > a,
-    label,
-    > * {
-      @apply mr-2 mb-2;
-    }
-  }
-  .space-xy-6 {
-    > div,
-    > button,
-    > a,
-    label,
-    > * {
-      @apply mr-4 mb-2;
-    }
-  }
-
-  html[dir="rtl"] {
-    .recharts-wrapper {
-      direction: rtl;
-    }
-    .recharts-yAxis {
-      .recharts-text {
-        text-anchor: start;
-      }
-    }
-  }
-  .dashcode-app {
-    .leaflet-control {
-      z-index: 0 !important;
-    }
-    .leaflet-control-container {
-      z-index: 555 !important;
-      position: relative;
-    }
-    .recharts-curve.recharts-tooltip-cursor {
-      display: none;
-    }
-    .recharts-wrapper.bar-chart {
-      .recharts-tooltip-cursor {
-        fill: transparent;
-      }
-    }
-    .recharts-tooltip-wrapper {
-      border: none !important;
-    }
-
-    // .recharts-cartesian-grid line,
-    // .recharts-polar-grid-angle line,
-    // .recharts-yAxis line,
-    // .recharts-xAxis line {
-    //   @apply stroke-black-200 dark:stroke-slate-700;
-    // }
-  }
+  /* other base styles... */
 }
 
 @layer components {
-  @import "components/table";
-  @import "components/map";
-  @import "components/progress";
-  @import "components/tippy";
-  @import "components/swiper";
-  @import "components/alert";
-  @import "components/card";
-  @import "components/auth";
-  @import "components/button";
-  @import "components/badge";
-  @import "components/typography";
-  @import "components/form";
-  @import "components/input-group";
-  @import "components/react-select";
-  @import "components/pagination";
-  @import "layout/header";
-  @import "layout/footer";
-  @import "layout/sidebar";
-  @import "layout/settings";
-  @import "utility/mix";
-  @import "utility/loading";
-  @import "utility/css-animation";
-  @import "utility/calander";
-  @import "utility/full-calender";
-  @import "components/print";
+  /* Your custom components styles if any */
 }
+
 @layer utilities {
+  /* Your utilities */
 }

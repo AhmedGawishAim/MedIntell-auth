@@ -5,9 +5,29 @@ export const menuItems = [
   },
 
   {
-    title: "Dashboard",
+    title: "Home",
     icon: "heroicons-outline:home",
-    link: "dashboard",
+    link: "home",
+  },
+  {
+    title: "Reports",
+    icon: "line-md:document-report",
+    link: "reports",
+  },
+  {
+    title: "Users",
+    icon: "heroicons:user-group",
+    link: "users",
+  },
+  {
+    title: "Wallet",
+    icon: "solar:wallet-outline",
+    link: "wallet",
+  },
+  {
+    title: "Settings",
+    icon: "material-symbols:settings-rounded",
+    link: "settings",
   },
 ];
 
