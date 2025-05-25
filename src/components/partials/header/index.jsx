@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Icon from "@/components/ui/Icon";
 import SwitchDark from "./Tools/SwitchDark";
@@ -120,7 +122,7 @@ const Header = ({ className = "custom-class" }) => {
             <Language />
             <SwitchDark />
             <MonoChrome />
-            {width >= breakpoints.md && <Message />}
+            {/* {width >= breakpoints.md && <Message />} */}
             {width >= breakpoints.md && <Notification />}
             {width >= breakpoints.md && <Profile />}
             {width <= breakpoints.md && (

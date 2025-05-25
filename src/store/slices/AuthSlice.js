@@ -12,9 +12,9 @@ const initialUsers = () => {
     : [
         {
           id: uuidv4(),
-          name: "dashcode",
-          email: "dashcode@gmail.com",
-          password: "dashcode",
+          name: "MEDintell",
+          email: "MEDintell@gmail.com",
+          password: "MEDintell",
         },
       ];
 };

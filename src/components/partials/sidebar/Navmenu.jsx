@@ -31,7 +31,7 @@ const Navmenu = ({ menus }) => {
       }
     });
 
-    document.title = `Dashcode | ${locationName}`;
+    document.title = `MEDintell | ${locationName}`;
     setActiveSubmenu(submenuIndex);
   }, [pathname]);
 

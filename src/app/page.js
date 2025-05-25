@@ -1,8 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { lazy } from 'react';
-import Image from 'next/image';
-// const Dashboard = lazy(() => import('@/pages/dashboard/index'));
 import HeaderSection from '@/pages-ui/landing-page/HeaderSection';
 import HeroSection from '@/pages-ui/landing-page/HeroSection';
 import AboutSection from '@/pages-ui/landing-page/AboutSection';
@@ -11,7 +8,7 @@ import StellarValuesSection from '@/pages-ui/landing-page/StellarValuesSection';
 import FeedbackSection from '@/pages-ui/landing-page/FeedbackSection';
 import FooterSection from '@/pages-ui/landing-page/FooterSection';
 
-export default function Home() {
+export default function Landing() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,12 +27,12 @@ export default function Home() {
       ) : (
         <div className="landing-page fade-in">
           <HeaderSection />
-          {/* <HeroSection /> */}
-          {/* <AboutSection />
+          <HeroSection />
+          <AboutSection />
           <SpecialtiesSection />
           <StellarValuesSection />
           <FeedbackSection />
-          <FooterSection /> */}
+          <FooterSection />
         </div>
       )}
     </div>

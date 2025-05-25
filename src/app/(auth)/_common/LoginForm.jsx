@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Textinput from "@/components/ui/Textinput";
+import Button from "@/components/ui/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import Checkbox from "@/components/ui/Checkbox";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
-import { handleLogin } from "../../../store/slices/AuthSlice";
-import { toast,Bounce } from "react-toastify";
-const schema = yup
-  .object({
-    email: yup.string().email("Invalid email").required("Email is Required"),
-    password: yup.string().required("Password is Required"),
-  })
-  .required();
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
+import { useLoginMutation } from "@/services/auth";
 
-  const { users } = useSelector((state) => state.auth);
+const schema = yup.object({
+  email: yup.string().email("Invalid email").required("Email is Required"),
+  password: yup.string().required("Password is Required"),
+}).required();
+
+const LoginForm = () => {
+  const router = useRouter();
+  const [login, { data: credentials, isSuccess, isLoading }] = useLoginMutation();
+
   const {
     register,
     formState: { errors },
@@ -29,35 +28,44 @@ const LoginForm = () => {
     mode: "all",
   });
 
-  const onSubmit = (data) => {
-    if (!checked) {
-      toast.error("must agree on terms" ,{ autoClose: 1000, transition: Bounce})
-      return;
-    }
-    dispatch(handleLogin(data));
+  useEffect(() => {
+    if (!isLoading && isSuccess && credentials) {
 
+      setTimeout(() => {
+        router.push('/home');
+      }, 1500);
+    }
+  }, [isSuccess, credentials]);
+
+  const onSubmit = (data) => {
+    login({
+      email: data.email.toLowerCase(),
+      password: data.password
+    });
   };
   
 
   const [checked, setChecked] = useState(false);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Textinput
         name="email"
         label="email"
-        defaultValue={users[0]?.email}
-        type="email"
+        type="text"
+        placeholder="Enter your email"
         register={register}
         error={errors.email}
+        autoComplete="current-email"
       />
       <Textinput
         name="password"
         label="passwrod"
         type="password"
-        defaultValue={users[0]?.password}
+        placeholder="Enter your password"
         register={register}
         error={errors.password}
+        autoComplete="current-password"
       />
       <div className="flex justify-between">
         <Checkbox
@@ -66,16 +74,15 @@ const LoginForm = () => {
           label="Keep me signed in"
         />
         <Link
-          href="/forget-password"
+          href="/forgot-password"
           className="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium"
         >
-          Forgot Password?{" "}
+          Forgot Password ?{" "}
         </Link>
       </div>
-
-      <button className="btn btn-dark block w-full text-center">Sign in</button>
+        <Button type="submit" text="Sign in" className="btn btn-dark block w-full text-center" isLoading={isLoading} disabled={isLoading} />
     </form>
-  );
+);
 };
 
 export default LoginForm;
